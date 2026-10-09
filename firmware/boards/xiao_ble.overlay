@@ -1,0 +1,42 @@
+#include <zephyr/dt-bindings/adc/nrf-saadc.h>
+#include <zephyr/dt-bindings/input/input-event-codes.h>
+
+/*
+ * Dev board wiring: buttons from D1 and D2 to GND.
+ * The production board maps these to the real A and C buttons.
+ */
+/ {
+	pet_buttons {
+		compatible = "gpio-keys";
+
+		button_a: button_a {
+			gpios = <&gpio0 3 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+			zephyr,code = <INPUT_KEY_A>;
+		};
+
+		button_c: button_c {
+			gpios = <&gpio0 28 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+			zephyr,code = <INPUT_KEY_C>;
+		};
+	};
+
+	zephyr,user {
+		io-channels = <&adc 0>;
+	};
+};
+
+/* Supply voltage (the coin cell on the production board) */
+&adc {
+	#address-cells = <1>;
+	#size-cells = <0>;
+	status = "okay";
+
+	channel@0 {
+		reg = <0>;
+		zephyr,gain = "ADC_GAIN_1_6";
+		zephyr,reference = "ADC_REF_INTERNAL";
+		zephyr,acquisition-time = <ADC_ACQ_TIME_DEFAULT>;
+		zephyr,input-positive = <NRF_SAADC_VDD>;
+		zephyr,resolution = <12>;
+	};
+};

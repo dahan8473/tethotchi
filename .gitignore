@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+hardware/renders/.*/
+hardware/renders/.fit_*.stl
+hardware/pcb/*.dsn
+hardware/pcb/*.ses
+hardware/pcb/*-backups/
+hardware/pcb/fab/gerbers/
+firmware/build/
+firmware/keys/*.pem
