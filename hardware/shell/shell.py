@@ -9,7 +9,7 @@ import sys
 from pathlib import Path
 
 from build123d import (
-    Axis, Box, Cylinder, Location, Plane, RectangleRounded, Rotation, Sphere, Text, Torus,
+    Axis, Box, Cylinder, Location, Plane, Polygon, RectangleRounded, Rotation, Sphere, Text, Torus,
     export_step, export_stl, extrude, fillet, loft,
 )
 
@@ -45,6 +45,10 @@ NOTCH_SPAN = 34
 LUG_R = 16.3
 LOCK_TURN = 60                                   # degrees to lock
 CAP_TOL = (0.15, 0.25, 0.35)                     # print all three, keep the one that feels right
+
+EDITION = 5                                      # first run: backs numbered 1/5 .. 5/5
+EDITION_X = -17.2                                # strip between the cap recess and the back edge
+EDITION_DEPTH = 0.4
 
 
 def face_plane(y):
@@ -195,6 +199,28 @@ def cap(tol):
     return c
 
 
+def back_face_plane(x, z):
+    """Sketch plane on the back face, reading upright when you look at the back."""
+    return Plane(origin=(x, D, z), x_dir=(-1, 0, 0), z_dir=(0, 1, 0))
+
+
+def edition_mark(n):
+    """Star over "n/5", debossed in the strip beside the cap."""
+    pts = []
+    for i in range(10):
+        r = 2.0 if i % 2 == 0 else 0.85
+        a = math.radians(90 + 36 * i)
+        pts.append((r * math.cos(a), r * math.sin(a)))
+    star = extrude(back_face_plane(EDITION_X, 5.5) * Polygon(*pts), amount=-EDITION_DEPTH)
+    num = extrude(back_face_plane(EDITION_X, -0.5) * Text(f"{n}/{EDITION}", 4.2), amount=-EDITION_DEPTH)
+    mark = star + num
+    bb = mark.bounding_box()
+    cap_edge = L.CELL[0] - (CAP_R + FIT)
+    back_edge = -(W - BACK_INSET_W) / 2
+    assert bb.max.X < cap_edge - 0.6 and bb.min.X > back_edge + 0.8, (bb.min.X, bb.max.X)
+    return mark
+
+
 def back_ribs():
     """Ribs from the back shell that press the PCB onto the LCD frame."""
     out = None
@@ -249,6 +275,8 @@ def build():
     front -= button_holes()
 
     parts = {"front": front, "back": back}
+    for n in range(1, EDITION + 1):
+        parts[f"back_{n}of{EDITION}"] = back - edition_mark(n)
     for tol in CAP_TOL:
         parts[f"cap_{int(tol * 100):02d}"] = cap(tol)
     parts["button"] = button_plunger()

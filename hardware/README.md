@@ -35,10 +35,11 @@ Freerouting isn't deterministic. `pcb/tethos-pet.routed-ok.kicad_pcb` is a run t
 
 ## Shell
 - `shell/out/front.step`, `back.step`, `cap_15/25/35.step` (twist-cap fit variants), `button.step` (x4)
+- First run of 5: `back_1of5.step` .. `back_5of5.step`, star + edition number debossed beside the cap
 - Fasteners: 2x M1.7 x 10 self-tapping, from the back
 
 ## Before ordering
 - [ ] JLC's assembly preview: check part rotations (SOT-23, crystal, connector are the usual offenders)
 - [ ] Email u-blox support for the ANNA-B112 B.2 reference Gerbers and compare the antenna area
 - [ ] Confirm the LCD ribbon's contacts face down after the fold (AFA07-S14FCA-00 is bottom-contact)
-- [ ] Order 5 LCDs + 5 ANNA-B112 for the prototype run
+- [ ] First run is 5 units: U1 comes from JLC stock (`RUN_QTY` in export_fab.py), order 5 LCDs from BuyDisplay

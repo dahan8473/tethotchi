@@ -21,7 +21,8 @@ GERB = FAB / "gerbers"
 
 LAYERS = "F.Cu,In1.Cu,In2.Cu,B.Cu,F.Paste,B.Paste,F.Silkscreen,B.Silkscreen,F.Mask,B.Mask,Edge.Cuts"
 NOT_ASSEMBLED = {"TP1"}           # footprint only: Tag-Connect pads
-CONSIGNED = {"U1"}                # ANNA-B112: buy from DigiKey, ship to JLC
+RUN_QTY = 5                       # first run: numbered 1/5 .. 5/5
+CONSIGNED = {"U1"} if RUN_QTY > 25 else set()   # JLC stocks ~29 ANNA-B112; past that, buy from DigiKey and ship to JLC
 
 
 def run(*args):
@@ -70,7 +71,7 @@ def bom():
         w = csv.writer(f)
         w.writerow(["Comment", "Designator", "Footprint", "LCSC Part #", "Note"])
         for (value, lcsc, fp), refs in sorted(groups.items(), key=lambda g: g[1][0]):
-            note = "CONSIGNED: supply 110 pcs (DigiKey)" if set(refs) & CONSIGNED else ""
+            note = f"CONSIGNED: supply {RUN_QTY + 10} pcs (DigiKey)" if set(refs) & CONSIGNED else ""
             w.writerow([value, ",".join(sorted(refs)), fp, lcsc, note])
     return out, len(groups)
 
