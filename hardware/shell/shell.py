@@ -254,6 +254,21 @@ def button_plunger():
     return fillet(shaft.edges().sort_by(Axis.X)[-1:], 0.4) + flange
 
 
+def button_sprue(n=6, pitch=6.0):
+    """n plungers on a rail, gated at the flange's bottom edge. JLC3DP won't print parts under 10 mm."""
+    fy, fz, fx = BTN_FLANGE
+    rail_w = 1.5
+    gate = 0.8
+    rail_z = -fz / 2 - gate - rail_w / 2
+    length = (n - 1) * pitch
+    out = Location((-fx / 2, 0, rail_z)) * Box(rail_w, length + 3.0, rail_w)
+    for i in range(n):
+        y = -length / 2 + i * pitch
+        out += Location((0, y, 0)) * button_plunger()
+        out += Location((-fx / 2, y, -fz / 2 - gate / 2 + 0.05)) * Box(fx, 0.8, gate + 0.1)
+    return out
+
+
 def split(shape):
     front_cut = ybox(0, 0, W + 20, H + 40, -5, L.Y_SPLIT)
     back_cut = ybox(0, 0, W + 20, H + 40, L.Y_SPLIT, D + 5)
@@ -280,6 +295,7 @@ def build():
     for tol in CAP_TOL:
         parts[f"cap_{int(tol * 100):02d}"] = cap(tol)
     parts["button"] = button_plunger()
+    parts["button_sprue"] = button_sprue()
     return parts
 
 

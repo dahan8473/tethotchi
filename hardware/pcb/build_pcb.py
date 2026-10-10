@@ -210,7 +210,8 @@ def rules(board):
     ds.m_MinClearance = mm(0.09)
     ds.m_TrackMinWidth = mm(0.09)
     ds.m_ViasMinSize = mm(0.45)
-    ds.m_MinThroughDrill = mm(0.2)
+    ds.m_MinThroughDrill = mm(0.3)          # JLC 4-layer: 0.3 mm drill / 0.45 mm pad is the no-fee via
+    ds.m_ViasMinAnnularWidth = mm(0.075)
     ds.m_CopperEdgeClearance = mm(0.3)
     # tent every via: the CR2477's + rim sits on the board around the (-) pad
     ds.m_CoverViasFront = True
@@ -221,14 +222,14 @@ def rules(board):
     d.SetClearance(mm(0.12))
     d.SetTrackWidth(mm(0.15))
     d.SetViaDiameter(mm(0.45))
-    d.SetViaDrill(mm(0.2))
+    d.SetViaDrill(mm(0.3))
 
     def netclass(name, width, clearance, nets):
         nc = pcbnew.NETCLASS(name)
         nc.SetClearance(mm(clearance))
         nc.SetTrackWidth(mm(width))
         nc.SetViaDiameter(mm(0.45))
-        nc.SetViaDrill(mm(0.2))
+        nc.SetViaDrill(mm(0.3))
         ns.SetNetclass(name, nc)
         for n in nets:
             ns.SetNetclassPatternAssignment(n, name)

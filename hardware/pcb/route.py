@@ -23,7 +23,7 @@ JAR = os.path.expanduser("~/.local/share/freerouting/freerouting.jar")
 PASSES = int(os.environ.get("PASSES", "60"))
 
 
-VIA_D, VIA_DRILL = 0.45, 0.2
+VIA_D, VIA_DRILL = 0.45, 0.3
 CLEAR = 0.15
 
 

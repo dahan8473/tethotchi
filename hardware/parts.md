@@ -1,4 +1,4 @@
-# Tethos Pet: parts list
+# Tethotchi: parts list
 
 Netlist and pin assignments live in `circuit.py`; placement in `layout.py`. Prices: JLC/LCSC at ~100 qty, checked 2026-10-09.
 

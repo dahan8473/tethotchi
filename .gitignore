@@ -8,3 +8,7 @@ hardware/pcb/*-backups/
 hardware/pcb/fab/gerbers/
 firmware/build/
 firmware/keys/*.pem
+
+# vendor PDFs: links in hardware/datasheets.md
+hardware/datasheets/
+.DS_Store

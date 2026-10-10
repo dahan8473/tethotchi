@@ -5,6 +5,7 @@ Writes hardware/pcb/fab/: gerbers.zip, bom.csv, cpl.csv
 """
 
 import csv
+import math
 import subprocess
 import sys
 import zipfile
@@ -22,6 +23,13 @@ GERB = FAB / "gerbers"
 LAYERS = "F.Cu,In1.Cu,In2.Cu,B.Cu,F.Paste,B.Paste,F.Silkscreen,B.Silkscreen,F.Mask,B.Mask,Edge.Cuts"
 NOT_ASSEMBLED = {"TP1"}           # footprint only: Tag-Connect pads
 RUN_QTY = 5                       # first run: numbered 1/5 .. 5/5
+# JLC's 3D models disagree with our footprints for these (checked in their placement preview, 2026-10-10):
+# ref -> (extra rotation deg, shift along the part's own Y in mm)
+JLC_FIX = {
+    "J1": (180, 2.245),   # LCSC model: body on the other side of the tails, origin 2.245 mm off ours
+    "D1": (180, 0.0),     # cathode band
+    "BZ1": (180, 0.0),    # + pin
+}
 CONSIGNED = {"U1"} if RUN_QTY > 25 else set()   # JLC stocks ~29 ANNA-B112; past that, buy from DigiKey and ship to JLC
 
 
@@ -53,8 +61,14 @@ def cpl():
         for r in rows:
             if r["Ref"] in NOT_ASSEMBLED:
                 continue
-            w.writerow([r["Ref"], f'{float(r["PosX"]):.3f}mm', f'{float(r["PosY"]):.3f}mm',
-                        "Top" if r["Side"] == "top" else "Bottom", f'{float(r["Rot"]):.1f}'])
+            x, y, rot = float(r["PosX"]), float(r["PosY"]), float(r["Rot"])
+            if r["Ref"] in JLC_FIX:
+                drot, shift = JLC_FIX[r["Ref"]]
+                x -= shift * math.sin(math.radians(rot))
+                y += shift * math.cos(math.radians(rot))
+                rot = (rot + drot) % 360
+            w.writerow([r["Ref"], f'{x:.3f}mm', f'{y:.3f}mm',
+                        "Top" if r["Side"] == "top" else "Bottom", f'{rot:.1f}'])
     raw.unlink()
     return out, len(rows) - len(NOT_ASSEMBLED)
 

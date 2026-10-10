@@ -1,4 +1,4 @@
-# Tethos Pet hardware
+# Tethotchi hardware
 
 Everything is generated from two files:
 - `layout.py`: board outline, part positions, shell dimensions, antenna keep-out
@@ -14,6 +14,8 @@ Everything is generated from two files:
 KPY=~/Applications/KiCad/KiCad.app/Contents/Frameworks/Python.framework/Versions/3.9/bin/python3
 $KPY hardware/pcb/build_pcb.py          # outline, placement, nets, planes, antenna keep-out
 PASSES=150 $KPY hardware/pcb/route.py   # power fanout + Freerouting (needs Java 25+) + ground pours
+.venv/bin/python hardware/art/make_art.py   # silkscreen art -> art/art.json
+$KPY hardware/pcb/add_art.py                # stamp it on the routed board
 ~/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli pcb drc --severity-error hardware/pcb/tethos-pet.kicad_pcb
 
 # 3. factory files -> hardware/pcb/fab/{gerbers.zip,bom.csv,cpl.csv}
@@ -29,7 +31,7 @@ Freerouting isn't deterministic. `pcb/tethos-pet.routed-ok.kicad_pcb` is a run t
 ## Board
 - 48.4 x 38.4 mm, 4 layers, 0.8 mm, ENIG (the CR2477 (-) contact is a bare pad)
 - L1 front (LCD side): J1 + LCD caps. L2 GND plane. L3 VBAT plane. L4 back: everything else
-- Vias 0.45/0.2 mm, tented. Min track/space 0.09 mm (SWD escape from the module only)
+- Vias 0.45/0.3 mm, tented (JLC's no-fee via size). Min track/space 0.09 mm (SWD escape from the module only)
 - u-blox ANNA-B112 on the top edge per SIM appendix B.2 (edge version): package 1.55 mm from the edge,
   copper keep-out on all layers, ANT_GND1 strip to the edge
 
