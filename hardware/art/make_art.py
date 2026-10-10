@@ -99,7 +99,7 @@ def front():
     top = -4.4
     parts.append(place(mark(5.4), left=-18.4, top=top))
     z = top
-    for s, size, gap in (("TETHOS PET", 2.2, 0.7), ("REV 0.1 OCT 2026", 1.6, 0.6), ("NOT FOR SALE", 1.6, 0)):
+    for s, size, gap in (("TETHOTCHI", 2.2, 0.7), ("REV 0.1 OCT 2026", 1.6, 0.6), ("NOT FOR SALE", 1.6, 0)):
         t = place(text(s, size), left=-11.6, top=z)
         parts.append(t)
         z = t.bounding_box().min.Y - gap
