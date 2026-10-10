@@ -26,7 +26,6 @@ RUN_QTY = 5                       # first run: numbered 1/5 .. 5/5
 # JLC's 3D models disagree with our footprints for these (checked in their placement preview, 2026-10-10):
 # ref -> (extra rotation deg, shift along the part's own Y in mm)
 JLC_FIX = {
-    "J1": (180, 2.245),   # LCSC model: body on the other side of the tails, origin 2.245 mm off ours
     "D1": (180, 0.0),     # cathode band
     "BZ1": (180, 0.0),    # + pin
 }

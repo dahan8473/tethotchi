@@ -8,7 +8,7 @@ Netlist and pin assignments live in `circuit.py`; placement in `layout.py`. Pric
 | U1 | u-blox ANNA-B112 (nRF52832 SiP, internal antenna) | C33688798 / DigiKey consigned | $7.50-8.60 | FCC XPYANNAB1, IC 8595A-ANNAB1. JLC stock ~29: buy 110 from DigiKey and consign. Edge antenna layout per SIM App. B.2 |
 | Y1 | Epson Q13FC1350000400, 32.768 kHz, 12.5 pF | C32346 (basic) | $0.14 | |
 | C5, C6 | 20 pF C0G 0402 | C1554 (basic) | <$0.01 | crystal load |
-| J1 | JUSHUO AFA07-S14FCA-00, 14P 1.0 mm slide-lock, 2.5 mm tall | C262720 | $0.10 | on the front side, under the LCD |
+| J1 | HDGC 1.0-B-14PWB, 14P 1.0 mm, dual-contact (top + bottom), 2.85 mm tall | C2915494 | $0.13 | front side, under the LCD; works whichever face the folded ribbon's contacts end up on |
 | C7-C10 | 1 µF 25 V X5R 0402 | C52923 (basic) | <$0.01 | LCD V0 / XV0 / VG / VDD |
 | C4, C11 | 100 nF 0402 | C1525 (basic) | <$0.01 | |
 | C3 | 4.7 µF 10 V 0402 | C23733 (basic) | $0.02 | module VCC |
@@ -41,4 +41,4 @@ Netlist and pin assignments live in `circuit.py`; placement in `layout.py`. Pric
 The module is the swing item: the ANNA-B112 is ~$1.30 more than the BT832 I first estimated, which is out of stock.
 
 ## Stack-up (front to back)
-front wall 1.2 + LCD 3.0 + gap 2.8 (J1 + ribbon) + PCB 0.8 + battery clip 8.3 + clearance 0.5 + cap 1.5 = **18.1 mm**
+front wall 1.2 + LCD 3.0 + gap 3.1 (J1 + ribbon) + PCB 0.8 + battery clip 8.3 + clearance 0.5 + cap 1.5 = **18.4 mm**

@@ -5,7 +5,7 @@ Coordinates in mm, viewed from the FRONT (screen side): X right, Z up, origin at
 """
 
 # Shell
-W, H, D = 52.0, 42.0, 18.1
+W, H, D = 52.0, 42.0, 18.4
 WALL = 1.6
 FRONT_WALL = 1.2
 
@@ -18,7 +18,7 @@ BOARD_T = 0.8
 # Depth stack (Y from front face)
 Y_LCD = FRONT_WALL                 # 1.2 .. 4.2
 LCD_T = 3.0
-LCD_GAP = 2.8                      # LCD back to PCB front: J1 (AFA07, 2.5 mm) + ribbon lives here
+LCD_GAP = 3.1                      # LCD back to PCB front: J1 (HDGC 1.0-B-14PWB, 2.85 mm) + ribbon lives here
 Y_PCB = Y_LCD + LCD_T + LCD_GAP    # 6.5 .. 7.3
 Y_PCB_BACK = Y_PCB + BOARD_T
 CLIP_H = 8.3
@@ -27,7 +27,7 @@ Y_SPLIT = 11.0                     # front/back shell split plane (behind the si
 # name: (x, z, w, h, side, note)   w/h are footprint extents in X/Z
 PARTS = {
     "LCD1": (0.0, 0.0, 43.5, 33.6, "front", "ERC12864FSF-9, normal orientation (6:00 viewing), tail exits the bottom"),
-    "J1":   (0.0, 5.98, 21.0, 8.35, "front", "JUSHUO AFA07-S14FCA-00, footprint origin (0, 6.3), FPC entry faces down"),
+    "J1":   (0.0, 6.1, 16.0, 6.65, "front", "HDGC 1.0-B-14PWB dual-contact, pads at z 8.5, opening faces down at z 2.8"),
     "U1":   (-8.0, 14.4, 6.5, 6.5, "back", "ANNA-B112 on the straight top edge, u-blox SIM App. B.2 (edge version)"),
     "Y1":   (-1.8, 13.0, 3.2, 1.5, "back", "32.768 kHz crystal, next to XL1/XL2"),
     "BT1":  (3.0, -2.0, 37.0, 22.9, "back", "CR2477 clip MY-2477-02; cell 24.5 dia"),

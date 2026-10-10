@@ -67,7 +67,7 @@ PLACE = {
     "SW3": (P["SW_C"][0], P["SW_C"][1], "back", ("dir", ["1", "2"], ["MP"], (1, 0))),
     "SW4": (P["SW_D"][0], P["SW_D"][1], "back", ("dir", ["1", "2"], ["MP"], (1, 0))),
     # front side, under the LCD
-    "J1": (0.0, 6.3, "front", 0),
+    "J1": (0.0, 8.5, "front", 0),   # ribbon tip lands ~z 6.0 after the fold: ~3 mm insertion
     "C10": (0.5, 12.2, "front", 90),
     "C11": (1.5, 12.2, "front", 90),
     "C7": (2.5, 12.2, "front", 90),

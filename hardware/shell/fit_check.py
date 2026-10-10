@@ -21,7 +21,7 @@ RENDERS = HERE.parent / "renders"
 
 def internals():
     """Board-side volumes from layout.py. Heights are datasheet values."""
-    heights = {"J1": 2.5, "U1": 1.2, "Y1": 0.8, "BZ1": 2.5, "TP1": 0.1, "C_BULK": 1.6,
+    heights = {"J1": 2.85, "U1": 1.2, "Y1": 0.8, "BZ1": 2.5, "TP1": 0.1, "C_BULK": 1.6,
                "SW_A": 3.3, "SW_B": 3.3, "SW_C": 3.3, "SW_D": 3.3}
     out = {}
     board = S.slab(L.BOARD_W, L.BOARD_H, L.BOARD_R, L.Y_PCB, L.Y_PCB_BACK)

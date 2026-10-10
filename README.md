@@ -10,7 +10,7 @@ A virtual pet keychain shaped like a tiny CRT TV. Made by [Tethos](https://tetho
 
 | | |
 |---|---|
-| Size | 52 x 42 x 18.1 mm, plus antennas and ball-chain loop |
+| Size | 52 x 42 x 18.4 mm, plus antennas and ball-chain loop |
 | Screen | 1.7" 128x64 monochrome FSTN (ST7567) |
 | Brain + radio | u-blox ANNA-B112 (nRF52832, certified BLE module with built-in antenna) |
 | Power | CR2477 coin cell behind a twist-lock cap, 6-12 month target |

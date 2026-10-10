@@ -46,14 +46,23 @@ PARTS = {
     "C6": ("20pF C0G 0402", "C1554", "Capacitor_SMD:C_0402_1005Metric", {"1": "XL2", "2": "GND"}),
 
     # --- LCD: ERC12864FSF-9 via 14-pin 1.0 mm FPC. Pinout: ERC12864-9 datasheet section 4.1 ---
-    "J1": ("AFA07-S14FCA-00", "C262720", "Connector_FFC-FPC:JUSHUO_AFA07-S14FCA-00_1x14-1MP_P1.0mm_Horizontal", {
-        "1": None, "2": None,              # BLA / BLK: backlight unused (FSTN, sunlight readable)
-        "3": "LCD_CS", "4": "LCD_RST", "5": "LCD_A0", "6": "LCD_SCL", "7": "LCD_SDA",
-        "8": "VBAT", "9": "GND",
-        "10": "LCD_V0", "11": "LCD_XV0",
-        "12": None, "13": None,            # NC per datasheet
-        "14": "LCD_VG",
-        "MP": "GND",                        # connector mounting tabs
+    # The ribbon folds 180 deg behind the LCD: LCD pin 1 (right edge, seen from the front) lands on pad 14.
+    # Dual-contact connector, so it works whichever face the ribbon's contacts end up on.
+    "J1": ("1.0-B-14PWB", "C2915494", "tethos:FPC-SMD_14P-P1.00_HDGC_1.0-B-14PWB", {
+        "1": "LCD_VG",  # LCD pin 14 VG
+        "2": None,  # LCD pin 13 NC
+        "3": None,  # LCD pin 12 NC
+        "4": "LCD_XV0",  # LCD pin 11 XV0
+        "5": "LCD_V0",  # LCD pin 10 V0
+        "6": "GND",  # LCD pin 9 VSS
+        "7": "VBAT",  # LCD pin 8 VDD
+        "8": "LCD_SDA",  # LCD pin 7 SDA
+        "9": "LCD_SCL",  # LCD pin 6 SCL
+        "10": "LCD_A0",  # LCD pin 5 A0
+        "11": "LCD_RST",  # LCD pin 4 RST
+        "12": "LCD_CS",  # LCD pin 3 CS
+        "13": None,  # LCD pin 2 BLK
+        "14": None,  # LCD pin 1 BLA
     }),
     "C7": ("1uF 25V X5R 0402", "C52923", "Capacitor_SMD:C_0402_1005Metric", {"1": "LCD_V0", "2": "GND"}),
     "C8": ("1uF 25V X5R 0402", "C52923", "Capacitor_SMD:C_0402_1005Metric", {"1": "LCD_XV0", "2": "GND"}),
@@ -85,7 +94,7 @@ PARTS = {
 # Things to confirm from datasheets before layout (kept here so they can't be forgotten)
 OPEN = [
     "SKRTLAE010 footprint: 2x 0.9 mm guide holes, no copper under the actuator (datasheet p.3 hatched area).",
-    "AFA07-S14FCA-00 is bottom-contact: confirm the LCD ribbon's contacts face the PCB after the 180 deg fold (else use the top-contact variant).",
+    "J1 is friction-fit (no latch): check the folded ribbon stays seated when the shell closes.",
     "ANNA-B112 edge layout follows SIM appendix B.2 from the figures; ask u-blox support for the reference Gerbers to confirm before production.",
     "LCD VDD min is 2.8 V; CR2477 sags below that near end of life. Measure contrast at 2.6-2.8 V on the prototype.",
 ]
