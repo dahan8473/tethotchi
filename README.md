@@ -2,7 +2,9 @@
 
 A virtual pet keychain shaped like a tiny CRT TV. Made by [Tethos](https://tethos.ca) / Tech for Social Impact as merch: you feed it, it grows, it visits other Tethotchis over Bluetooth, and it dies if you forget about it.
 
-![Tethotchi shell](hardware/renders/concept-crt.png)
+![Tethotchi](hardware/renders/hero.png)
+
+<sub>Product render generated from the CAD in this repo (GPT Image 2). Real units are still being built.</sub>
 
 ## Specs
 
@@ -42,6 +44,9 @@ The board and the case are both code. Change `layout.py`, rerun the pipeline in 
 | ![PCB top](hardware/renders/pcb-top.png) | ![PCB bottom](hardware/renders/pcb-bottom.png) |
 
 ## Case
+
+![CAD views](hardware/renders/concept-crt.png)
+
 
 Two halves that close with two M1.7 screws, a twist-lock battery cap (printed in three tolerances to pick the best fit), and button plungers printed on a sprue. The first run of five has numbered backs, ★ 1/5 to ★ 5/5.
 
